@@ -13,7 +13,7 @@ class AddLeague extends Migration
      */
     public function up()
     {
-        Schema::create('league', function (Blueprint $table) {
+        Schema::create('leagues', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('category');
@@ -27,6 +27,6 @@ class AddLeague extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('leagues');
     }
 }

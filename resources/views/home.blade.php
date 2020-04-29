@@ -1,23 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <div>
+        <h3>Liste des prochains matchs</h3>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        @if($matchs->count() == 0)
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+            <p>Aucun match</p>
+
+        @endif
+
+        @if($matchs->count() > 0)
+            @foreach($matchs as $match)
+
+                @include('Match.match')
+
+            @endforeach
+        @endif
     </div>
-</div>
 @endsection

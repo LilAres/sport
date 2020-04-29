@@ -13,7 +13,7 @@ class AddMatch extends Migration
      */
     public function up()
     {
-        Schema::create('match', function (Blueprint $table) {
+        Schema::create('matchs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('local_team');
             $table->string('visitor_team');
@@ -34,6 +34,6 @@ class AddMatch extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('matchs');
     }
 }

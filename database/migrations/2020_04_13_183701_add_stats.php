@@ -14,7 +14,7 @@ class AddStats extends Migration
     public function up()
     {
         Schema::create('stats', function (Blueprint $table) {
-            $table->increments('stats_id');
+            $table->increments('id');
             $table->string('name');
             $table->integer('match_id');
             $table->integer('player_id');
@@ -30,6 +30,6 @@ class AddStats extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('stats');
     }
 }

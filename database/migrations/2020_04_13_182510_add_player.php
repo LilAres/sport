@@ -13,15 +13,16 @@ class AddPlayer extends Migration
      */
     public function up()
     {
-        Schema::create('player', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('user_id')->nullable();
         });
 
         Schema::create('player_team', function (Blueprint $table) {
-            $table->integer('player_id');
             $table->integer('team_id');
-            $table->primary(['player_id', 'team_id']);
+            $table->integer('player_id');
+            $table->primary(['team_id', 'player_id']);
         });
     }
 
@@ -32,6 +33,7 @@ class AddPlayer extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('players');
+        Schema::dropIfExists('player_team');
     }
 }

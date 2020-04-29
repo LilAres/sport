@@ -13,7 +13,7 @@ class AddSeason extends Migration
      */
     public function up()
     {
-        Schema::create('season', function (Blueprint $table) {
+        Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->dateTime('start_date');
@@ -29,6 +29,6 @@ class AddSeason extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('seasons');
     }
 }

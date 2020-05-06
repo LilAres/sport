@@ -23,10 +23,13 @@ class TeamController extends Controller
         }
 
         $player = Player::where('user_id', auth()->user()->id)->first();
-        $teams = $player->teams()->get();
-        
+        if($player != null){
+            $teams = $player->teams()->get();
+            
+            return view('Registered.myTeam', compact('teams'));
+        }
 
-        return view('Registered.myTeam', compact('teams'));
+        return view('Registered.myTeam');
     }
 
     // Affiche les renseignements d'une team
@@ -52,17 +55,5 @@ class TeamController extends Controller
         $player->delete();
 
         return back();
-    }
-
-
-
-
-
-
-    public function stats(){
-        $player = auth()->user()->player()->get();
-        $stats = $player->stats()->get();
-
-        return view('Registered.myStats', compact('stats'));
     }
 }

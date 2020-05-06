@@ -22,6 +22,8 @@ class AddMatch extends Migration
             $table->integer('season_id');
             $table->string('winning_team');
             $table->string('losing_team');
+            $table->integer('local_shots');
+            $table->integer('visitor_shots');
             $table->integer('final_score_local');
             $table->integer('final_score_visitor');
         });

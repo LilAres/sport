@@ -7,55 +7,67 @@
     <div>
         <h3>Ajouter un match</h3>
         
-        <form method="POST" action="/manageMatchs/store">
-            {{ csrf_field() }}
+        @if(!$noTeams)
+            <form method="POST" action="/manageMatchs/store">
+                {{ csrf_field() }}
 
-            @include('layouts.errors')
-            
-            <div class="form-group">
-                <label for="title">Équipe locale :</label>
-                <select name="local_team" class="form-control">
-                    <option value="">Sélectionner une équipe</option>
-                        @foreach ($equipes as $equipe)
-                            <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
-                        @endforeach
-                </select>
-            </div>
+                @include('layouts.errors')
+                
+                <div class="form-group">
+                    <label for="title">Équipe locale :</label>
+                    <select name="local_team" class="form-control">
+                        <option value="">Sélectionner une équipe</option>
+                            @foreach ($equipes as $equipe)
+                                @if($equipe->players->count() > 0)
+                                    <option value="{{ $equipe->id }}">{{ $equipe->name }} - {{ $equipe->league->name }} {{ $equipe->league->category }}</option>
+                                @endif
+                            @endforeach
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="title">Équipe viteur :</label>
-                <select name="visitor_team" class="form-control">
-                    <option value="">Sélectionner une équipe</option>
-                        @foreach ($equipes as $equipe)
-                            <option value="{{ $equipe->id }}">{{ $equipe->name }}</option>
-                        @endforeach
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="title">Équipe viteur :</label>
+                    <select name="visitor_team" class="form-control">
+                        <option value="">Sélectionner une équipe</option>
+                            @foreach ($equipes as $equipe)
+                                @if($equipe->players->count() > 0)
+                                    <option value="{{ $equipe->id }}">{{ $equipe->name }} - {{ $equipe->league->name }} {{ $equipe->league->category }}</option>
+                                @endif
+                            @endforeach
+                    </select>
+                </div>
 
-            <div class="form-group"> 
-                <label class="control-label" for="date">Date du match :</label>
-                <input class="form-control date" name="date" placeholder="MM/DD/YYY" type="text"/>
-            </div>
+                <div class="form-group"> 
+                    <label class="control-label" for="date">Date du match :</label>
+                    <input class="form-control date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                </div>
 
-            <div class="form-group">
-                <label for="title">Lieux :</label>
-                <input class="form-control" placeholder="Lieux" name="localisation" >
-            </div>
+                <div class="form-group">
+                    <label for="title">Lieux :</label>
+                    <input class="form-control" placeholder="Lieux" name="localisation" >
+                </div>
 
-            <div class="form-group">
-                <label for="title">Saison :</label>
-                <select name="season" class="form-control">
-                    <option value="">Sélectionner une saison</option>
-                        @foreach ($seasons as $season)
-                            <option value="{{ $season->id }}">{{ $season->name }}</option>
-                        @endforeach
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="title">Saison :</label>
+                    <select name="season" class="form-control">
+                        <option value="">Sélectionner une saison</option>
+                            @foreach ($seasons as $season)
+                                <option value="{{ $season->id }}">{{ $season->name }}</option>
+                            @endforeach
+                    </select>
+                </div>
 
-            <div class="form-group">
-              <button type="submit" class="btn btn-success">Ajouter</button>
-            </div>
-        </form>
+                <div class="form-group">
+                <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            </form>
+        @endif
+
+        @if($noTeams)
+
+            <p>Aucune équipe n'est disponible</p>
+
+        @endif
     </div>
 
     <hr>

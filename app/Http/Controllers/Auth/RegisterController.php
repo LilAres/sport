@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Player;
+use DB;
+use App\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -72,11 +74,17 @@ class RegisterController extends Controller
         ]);
 
         // Lier le user au player si un existe
-        //$player = Player::select('id')->where('name', $data['name'])->first();
+        $player = Player::select('id')->where('name', $data['name'])->first();
 
-        //if($user != null){
-        //    $player->update(['user_id' => $user->id, 'name' => $user->name]);
-        //}
+        if($player != null){
+            $data = array('name'=>$data['name'], 'user_id'=>$user->id);
+            DB::table('players')->where('id', $player->id)->update($data);
+        }
+
+        // Assigner le rôle joueur au user
+        $role = Role::where('name', 'Registered')->first();
+
+        $user->assignRole($role);
 
         return $user;
     }

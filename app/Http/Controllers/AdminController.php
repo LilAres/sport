@@ -61,11 +61,16 @@ class AdminController extends Controller
             'league' => 'required',
             'admin' => 'required'
 		]);
-
+        
         // Enregistrer
         $name = $request->input('name');
         $league_id = $request->input('league');
         $admin_id = $request->input('admin');
+
+        // Si le nom d'équipe est déja pris
+        if(Team::where('name', $name)->first()){
+            return back()->withErrors(["L'équipe existe déjà!"]);
+        }
 
         $data = array('name'=>$name, 'admin_id'=>$admin_id, 'league_id'=>$league_id);
         DB::table('teams')->insert($data);
@@ -275,10 +280,19 @@ class AdminController extends Controller
         
         $date = Carbon\Carbon::now()->format('Y-m-d H:i:s');
         $seasons = Season::get();
-        $equipes = Team::get();
-        $matchs = Match::orderByDesc('date')->get();
+        $matchs = Match::orderBy('date')->get();
 
-        return view('Match.index', compact('matchs', 'equipes', 'seasons', 'date'));
+        $equipes = Team::with('players', 'league')->get();
+
+        // S'il y au moins une équipe qui à des joueurs
+        $noTeams = true;
+        foreach($equipes as $equipe){
+            if($equipe->players->count() > 0){
+                $noTeams = false;
+            }
+        }
+
+        return view('Match.index', compact('matchs', 'equipes', 'seasons', 'date', 'noTeams'));
     }
 
     // Supprime un match
@@ -308,8 +322,8 @@ class AdminController extends Controller
         ]);
         
         // Enregistrer
-        $local_team = Team::find($request->input('local_team'))->name;
-        $visitor_team = Team::find($request->input('visitor_team'))->name;
+        $local_team = Team::with('league')->find($request->input('local_team'));
+        $visitor_team = Team::with('league')->find($request->input('visitor_team'));
         $date = Carbon\Carbon::parse($request->input('date'));
 
         // Si la date est plus petite ou égale qu'aujourdhui
@@ -323,15 +337,23 @@ class AdminController extends Controller
             return back()->withErrors(['Les deux équipes ne peuvent pas être les mêmes!']);
         }
 
+        // Si les deux équipes ne sont pas de la même league
+        if($local_team->league != $visitor_team->league){
+            return back()->withErrors(['Veuillez choisir deux équipe qui sont dans la même league!']);
+        }
+
         $localisation = $request->input('localisation');
         $season = $request->input('season');
         $winning_team = "";
         $losing_team = "";
         $final_score_local = 0;
         $final_score_visitor = 0;
+        $local_shots = 0;
+        $visitor_shots = 0;
 
-        $data = array('local_team'=>$local_team, 'visitor_team'=>$visitor_team, 'date'=>$date, 'localisation'=>$localisation, 
-        'season_id'=>$season, 'winning_team'=>$winning_team, 'losing_team'=>$losing_team, 'final_score_local'=>$final_score_local, 'final_score_visitor'=>$final_score_visitor);
+        $data = array('local_team'=>$local_team->name, 'visitor_team'=>$visitor_team->name, 'date'=>$date, 'localisation'=>$localisation, 
+        'season_id'=>$season, 'winning_team'=>$winning_team, 'losing_team'=>$losing_team, 'final_score_local'=>$final_score_local,
+         'final_score_visitor'=>$final_score_visitor, 'local_shots'=>$local_shots, 'visitor_shots'=>$visitor_shots);
         DB::table('matchs')->insert($data);
 
 		// Rediriger

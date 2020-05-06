@@ -15,7 +15,7 @@ class AddTeam extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('admin_id');
             $table->integer('league_id');
         });

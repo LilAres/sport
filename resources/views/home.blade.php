@@ -3,11 +3,11 @@
 
 @section('content')
     <div>
-        <h3>Liste des prochains matchs</h3>
+        <h3>Matchs à venir</h3>
 
         @if($matchs->count() == 0)
 
-            <p>Aucun match</p>
+            <p>Aucun match à venir</p>
 
         @endif
 

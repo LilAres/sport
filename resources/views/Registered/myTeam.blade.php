@@ -6,13 +6,13 @@
 <div>
     <h3>Liste de toutes vos équipes</h3> 
 
-    @if($teams->count() == 0)
+    @if(!isset($teams))
 
         <p>Vous êtes dans aucune équipe</p>
 
     @endif
 
-    @if($teams->count() > 0)
+    @if(isset($teams))
         @foreach($teams as $team)
 
             <hr>

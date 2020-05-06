@@ -4,15 +4,16 @@
 @section('content')
 
 <div>
+    <h3>Votre équipe</h3>
     @if($team == null)
 
-        <h2>Vous ne dirigez pas d'équipe</h2>
+        <p>Vous ne dirigez pas d'équipe.</p>
 
     @endif
 
     @if($team != null)
 
-        <h3>Voici les information de l'équipe que vous dirigez :</h3> 
+        <h6>Voici les information de l'équipe que vous dirigez :</h6> 
         <form method="POST" action="/manageTeam/changeName">
             {{ csrf_field() }}
 

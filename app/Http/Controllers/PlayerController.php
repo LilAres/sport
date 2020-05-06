@@ -20,6 +20,7 @@ class PlayerController extends Controller
         }
 
         $player = Player::where('user_id', auth()->user()->id)->first();
+
         $stats = $player->stats()->with('match')->orderByDesc('time')->get();
 
         return view('Registered.myStats', compact('stats'));

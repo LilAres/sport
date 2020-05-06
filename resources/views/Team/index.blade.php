@@ -20,7 +20,7 @@
                 <select name="league" class="form-control">
                     <option value="">Sélectionner une ligue</option>
                         @foreach ($leagues as $league)
-                            <option value="{{ $league->id }}">{{ $league->name }}</option>
+                            <option value="{{ $league->id }}">{{ $league->name }} - {{ $league->category }}</option>
                         @endforeach
                 </select>
             </div>

@@ -26,6 +26,19 @@ Route::post('/manageSeasons/store', 'AdminController@storeSeason');
 
 Route::post('/managePlayer/store', 'AdminController@storePlayer');
 
+    // Section pour les matchs
+Route::get('/affrontement/{match}', 'AffrontementController@index');
+Route::post('/affrontement/{match}/scoreLocal', 'AffrontementController@scoreLocal');
+Route::post('/affrontement/{match}/lancerLocal', 'AffrontementController@lancerLocal');
+Route::post('/affrontement/{match}/scoreVisitor', 'AffrontementController@scoreVisitor');
+Route::post('/affrontement/{match}/lancerVisitor', 'AffrontementController@lancerVisitor');
+Route::post('/affrontement/statLocal', 'AffrontementController@statLocal');
+Route::post('/affrontement/statVisitor', 'AffrontementController@statVisitor');
+Route::post('/affrontement/{match}/endMatch', 'AffrontementController@endMatch');
+
+
+
+
 // Page pour les admin des équipes
 Route::get('/manageTeam', 'TeamAdminController@myTeam');
 Route::post('/manageTeam/changeName', 'TeamAdminController@changeName');

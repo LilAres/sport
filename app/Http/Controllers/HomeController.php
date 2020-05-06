@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $date = Carbon\Carbon::now()->format('Y-m-d H:i:s');
-        $matchs = Match::where('date', '>', $date)->orderByDesc('date')->take(5)->get();
+        $matchs = Match::where('date', '>=', $date)->orderByDesc('date')->take(5)->get();
 
         return view('home', compact('matchs', 'date'));
     }

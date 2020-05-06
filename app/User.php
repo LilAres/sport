@@ -22,6 +22,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);  
     }
 
+    public function assignRole(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
+
     public function Admin(){
         foreach($this->roles as $role){
             if($role->name == "Admin"){

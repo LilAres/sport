@@ -19,7 +19,7 @@ class Team extends Model
 
     // La ligue dans laquelle l'équipe est classé
     public function league(){
-        return $this->hasOne(League::class);
+        return $this->belongsTo(League::class);
     }
 }
 

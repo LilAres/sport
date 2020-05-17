@@ -4,6 +4,14 @@
 @section('content')
 
 <div>
+
+
+    <div class="blog-header">
+        <div class="container">
+            <h1 class="blog-title">Gérer votre équipe</h1>
+        </div>
+    </div>
+
     <h3>Votre équipe</h3>
     @if($team == null)
 

@@ -20,7 +20,40 @@
 
   </head>
   <body>
+    <div id="mobilemenu">
+      <a id="close"><img src="https://www.location-sqde.ca/wp-content/themes/blankslate-child/img/close-menu.png" alt="Close Icon" /></a>
+      <ul>
+        @if(Auth::check())
+        <li><a href="/" class="nav-link">Accueil</a></li>
+        @endif
+        
+        @if(!Auth::check())
+          <li><a href="/login" class="nav-link">Se connecter</a></li>
+          <li><a href="/register" class="nav-link">S'inscrire</a></li>
+        @endif
 
+        @if(Auth::check())
+          @if(Auth::user()->Admin())
+            <li><a href="/manageTeams" class="nav-link">Gérer les équipes</a></li>
+            <li><a href="/manageMatchs" class="nav-link">Gérer les matchs</a></li>
+            <li><a href="/manageSeasons" class="nav-link">Gérer les saisons</a></li>
+            <li><a href="/manageLeagues" class="nav-link">Gérer les ligues</a></li>
+          @endif
+          
+          @if(Auth::user()->Registered())
+          <li><a href="/myTeams" class="nav-link">Mes équipes</a></li>
+          <li><a href="/myStats" class="nav-link">Mes statistiques</a></li>
+          @endif
+
+          @if(Auth::user()->Team_Admin())
+          <li><a href="/manageTeam" class="nav-link">Mon équipe</a></li>
+          @endif
+
+          <li><a href="/logout" class="nav-link text-danger">Se déconnecter</a><li>
+        @endif</div>
+      </ul>
+    </div>
+  <div class="page-container" id="affrontement">
     @include('layouts.nav')
 
     <div class="container justify-content-center">
@@ -64,11 +97,12 @@
 
 
   @include('layouts.footer')
-
+  <div class="page-container">  
   </body>
 
 </html>
 
+<script type='text/javascript' src='/js/functions.js'></script>
 
 <script>
     // Ajouter un but

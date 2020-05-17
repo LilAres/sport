@@ -1,3 +1,3 @@
 <footer class="blog-footer">
-  <p>Blog template built for Brayan</p>
+  <p>Travail réalisé par Brayan Arès et Zachary L'Heureux</p>
 </footer>

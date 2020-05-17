@@ -18,7 +18,7 @@
     <h5>{{ $match->local_team }} (local) VS {{$match->visitor_team }} (visiteur)</h5>
 
     <p>
-        Lieux : {{ $match->localisation }}<br>
+        Lieu : {{ $match->localisation }}<br>
         Date : {{ date('d/M/Y', strtotime($match->date)) }}
     </p>    
 

@@ -5,6 +5,15 @@
 
 <div>
     <div>
+
+            
+        <div class="blog-header">
+            <div class="container">
+                <h1 class="blog-title">Gérer les matchs</h1>
+            </div>
+        </div>
+
+
         <h3>Ajouter un match</h3>
         
         @if(!$noTeams)
@@ -26,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Équipe viteur :</label>
+                    <label for="title">Équipe visiteur :</label>
                     <select name="visitor_team" class="form-control">
                         <option value="">Sélectionner une équipe</option>
                             @foreach ($equipes as $equipe)
@@ -43,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Lieux :</label>
+                    <label for="title">Lieu :</label>
                     <input class="form-control" placeholder="Lieux" name="localisation" >
                 </div>
 

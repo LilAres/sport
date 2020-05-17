@@ -45,7 +45,7 @@
 
     <div col="col-4">
         <div class="form-group" id="statLocalForm">
-            <label for="title">Joueurs locals :</label>
+            <label for="title">Joueurs locaux :</label>
             <select name="localPlayer" class="form-control localPlayer">
                 <option value="default">Sélectionner un joueur</option>
                     @foreach ($localPlayers->players as $player)

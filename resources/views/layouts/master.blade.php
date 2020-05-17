@@ -22,32 +22,64 @@
     <!-- Custom styles for this template -->
     <link href="/css/sport.css" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
   </head>
   <body>
+  <div id="mobilemenu">
+      <a id="close"><img src="https://www.location-sqde.ca/wp-content/themes/blankslate-child/img/close-menu.png" alt="Close Icon" /></a>
+      <ul>
+        @if(Auth::check())
+        <li><a href="/" class="nav-link">Accueil</a></li>
+        @endif
+        
+        @if(!Auth::check())
+          <li><a href="/login" class="nav-link">Se connecter</a></li>
+          <li><a href="/register" class="nav-link">S'inscrire</a></li>
+        @endif
 
-    @include('layouts.nav')
+        @if(Auth::check())
+          @if(Auth::user()->Admin())
+            <li><a href="/manageTeams" class="nav-link">Gérer les équipes</a></li>
+            <li><a href="/manageMatchs" class="nav-link">Gérer les matchs</a></li>
+            <li><a href="/manageSeasons" class="nav-link">Gérer les saisons</a></li>
+            <li><a href="/manageLeagues" class="nav-link">Gérer les ligues</a></li>
+          @endif
+          
+          @if(Auth::user()->Registered())
+          <li><a href="/myTeams" class="nav-link">Mes équipes</a></li>
+          <li><a href="/myStats" class="nav-link">Mes statistiques</a></li>
+          @endif
 
-    <div class="blog-header">
+          @if(Auth::user()->Team_Admin())
+          <li><a href="/manageTeam" class="nav-link">Mon équipe</a></li>
+          @endif
+
+          <li><a href="/logout" class="nav-link text-danger">Se déconnecter</a><li>
+        @endif</div>
+      </ul>
+    </div>
+    <div class="page-container">
+
+      @include('layouts.nav')
+
+
       <div class="container">
-        <h1 class="blog-title">Sport</h1>
-      </div>
-    </div>
 
+        <div class="row">
 
-    <div class="container">
+          @yield('content')
 
-      <div class="row">
-
-        @yield('content')
+        </div>
 
       </div>
 
+      @include('layouts.footer')
     </div>
-
-  @include('layouts.footer')
-
   </body>
 
 </html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type='text/javascript' src='/js/functions.js'></script>

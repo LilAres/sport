@@ -5,6 +5,15 @@
 
 <div>
     <div>
+
+
+        <div class="blog-header">
+            <div class="container">
+                <h1 class="blog-title">Gérer les saisons</h1>
+            </div>
+        </div>
+
+
         <h3>Ajouter une saison</h3>
         
         <form method="POST" action="/manageSeasons/store">

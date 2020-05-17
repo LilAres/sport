@@ -329,7 +329,7 @@ class AdminController extends Controller
         // Si la date est plus petite ou égale qu'aujourdhui
         $mytime = Carbon\Carbon::now()->format('Y/m/d');
         if($mytime >= $date->format('Y/m/d')){
-            return back()->withErrors(['La date doit être dans le future!']);
+            return back()->withErrors(['La date doit être dans le futur!']);
         }
 
         // Si l'équipe locale est égal à l'équipe visiteur rediriger avec erreur
@@ -339,7 +339,7 @@ class AdminController extends Controller
 
         // Si les deux équipes ne sont pas de la même league
         if($local_team->league != $visitor_team->league){
-            return back()->withErrors(['Veuillez choisir deux équipe qui sont dans la même league!']);
+            return back()->withErrors(['Veuillez choisir deux équipes qui sont dans la même ligue!']);
         }
 
         $localisation = $request->input('localisation');

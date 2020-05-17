@@ -21,7 +21,7 @@
   </head>
   <body>
     <div id="mobilemenu">
-      <a id="close"><img src="https://www.location-sqde.ca/wp-content/themes/blankslate-child/img/close-menu.png" alt="Close Icon" /></a>
+      <a id="close"><img src="/close-menu.png" alt="Close Icon" /></a>
       <ul>
         @if(Auth::check())
         <li><a href="/" class="nav-link">Accueil</a></li>
